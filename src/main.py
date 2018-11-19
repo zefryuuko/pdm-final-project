@@ -1,10 +1,14 @@
-# -------------------------------------- #
-#     Google Assistant Home Control      #
-#   using Dialogflow and HTTP Request    #
-# -------------------------------------- #
-#            Final Project By            #
-#      Zefanya Gedalya - 2201796970      #
-# -------------------------------------- #
+# Program Design Methods Final Project:
+# Google Assistant Voice Control
+# --------------------------------------
+# Program by
+# Zefanya Gedalya B.L.T - 2201796970
+# Student of Computer Science
+# Binus University International
+# --------------------------------------
+# File Description (main.py)
+# This file contains the main program. This file is what's responsible
+# for handling webhook requests.
 
 import time
 import logging
@@ -19,22 +23,28 @@ from modules.backgroundhandler import BackgroundHandler
 
 
 # ----- MAIN INITIALIZATION ----- #
-timeAppStart = time.time()
+
+timeAppStart = time.time()      # Gets the time that the app started
 log("MAIN", 0, "Initalizing Flask and Flask-Assistant...")
 app = Flask(__name__)
 assist = Assistant(app, route='/')
 
+# Load the JSON files
 jsonConfigFile = JSON("config.json")
 jsonDeviceList = JSON("devices.json")
 
+# Load plugins
 ploader = PluginLoader("plugins")
 plugins = ploader.getPlugins()
 pluginNames = ploader.getPluginList()
 
+# Run background tasks for each plugin
 log("MAIN", 0, "Running plugin background tasks...")
 bgh = BackgroundHandler(plugins)
 bgh.run()
 
+# Disables or enables the flask command line output depending on what the user
+# had already set on config.json file.
 if jsonConfigFile.json()["flaskLogging"] == 0:
     log("MAIN", 2,
         "flaskLogging is set to 0. Will not show flask command line output.")
@@ -44,16 +54,21 @@ elif jsonConfigFile.json()["flaskLogging"] == 1:
     log("MAIN", 2,
         "flaskLogging is set to 0. Will show flask command line output.")
 
-timeAppEnd = time.time()
+timeAppEnd = time.time()        # Gets the time that the app finished loading.
 log("MAIN", 0, "DONE in {}s".format(round((timeAppEnd - timeAppStart), 3)))
 
 
+# A function that handles data sending to a certain plugin that returns
+# a boolean value
 def sendData(plugin, id, value, param):
     for i in range(len(pluginNames)):
         if pluginNames[i].lower() == plugin.lower():
             if plugins[i].sendData(id, value, param):
                 return True
     return False
+
+# A function that handles data sending to a certain plugin that returns
+# a string
 
 
 def sendDataStr(plugin, id, value, param):
@@ -63,6 +78,7 @@ def sendDataStr(plugin, id, value, param):
     return False
 
 
+# A function to log the HTTP request activities
 def httpLogging(ip, path, method, time):
     log("MAIN", 0, "{} {} \"{}\" at {}".format(ip, method, path, time))
 
@@ -71,8 +87,11 @@ dflowErrMsg = "Something went wrong. Please check the console and try again."
 
 
 # ----- HTTP REQUEST HANDLING ----- #
+# This part of the code is mainly used for debugging purposes. Some of it is
+# used to communicate between programs via the internet
 
-
+# Shows the message when user opened "/" in the web browser, indicating that
+# the program is running successfully
 @app.route("/")
 def httpRoot():
     time = dt.now().strftime("%Y/%m/%d %H:%M")
@@ -80,6 +99,7 @@ def httpRoot():
     return "If you see this message, the program is running."
 
 
+# Shows the devices.json file when user opened "/devices.json"
 @app.route("/devices.json")
 def httpDevicesJson():
     time = dt.now().strftime("%Y/%m/%d %H:%M")
@@ -87,6 +107,7 @@ def httpDevicesJson():
     return jsonDeviceList.toString()
 
 
+# Shows the config.json file when user opened "/config.json"
 @app.route("/config.json")
 def httpConfigJson():
     time = dt.now().strftime("%Y/%m/%d %H:%M")
@@ -94,6 +115,7 @@ def httpConfigJson():
     return jsonConfigFile.toString()
 
 
+# Shows the list of running threads when the user opened "/threads"
 @app.route("/threads")
 def httpThreadsList():
     time = dt.now().strftime("%Y/%m/%d %H:%M")
@@ -101,6 +123,7 @@ def httpThreadsList():
     return str(bgh.getRunningThreads())
 
 
+# This function is simillar to @app.route("/devices.json"), but it
 # returns only specific JSON key requested (<deviceID>) when called
 @app.route("/devices/<deviceID>")
 def httpDeviceJson(deviceID):
@@ -114,13 +137,15 @@ def httpDeviceJson(deviceID):
         return keyValue
 
 
-# send command based on the device ID specified on the json file, and check
-# if the plugin has the command or not.
+# Sends command based on the device ID specified on the json file, and check
+# if the plugin has the command or not. This can be used for debugging, or
+# for another program to commmunicate with each other
 @app.route("/devices/<deviceID>/<command>/<param>")
 def sendCommand(deviceID, command, param):
     time = dt.now().strftime("%Y/%m/%d %H:%M")
     httpLogging(request.remote_addr, request.path, request.method, time)
-    # check if the deviceID is on the config.json file
+
+    # check if the deviceID is on the devices.json file
     if deviceID in jsonDeviceList.json():
         pluginType = jsonDeviceList.json()[deviceID]["type"]
         pluginID = pluginNames.index(pluginType)
@@ -146,6 +171,7 @@ def sendCommand(deviceID, command, param):
 
 
 #  ----- DIALOGFLOW INTENT HANDLING ----- #
+# This part of the code handles the input from Google Assistant.
 
 # Actions to do if "toggleOnOff" intent is triggered by voice or text
 # via Google Assistant
@@ -154,7 +180,10 @@ def dflowToggle(bool, obj):
     log("MAIN", 0, "Received \"toggleOnOff\" intent from Dialogflow.")
     keys = jsonDeviceList.json().keys()
     for i in keys:
+        # Check if the device name that the user wanted to send command to\
+        # exists in the devices.json
         if jsonDeviceList.json()[i]["name"].lower() == obj.lower():
+            # If the data is sent successfully
             if sendData(jsonDeviceList.json()[i]["type"], i, bool, ""):
                 log("toggleOnOff", 0, "Command sent successfully")
                 speech = "Ok. the {} is {}".format(obj, bool)
@@ -162,8 +191,6 @@ def dflowToggle(bool, obj):
             else:
                 log("toggleOnOff", 2, "Command not sent.")
                 return ask(dflowErrMsg)
-        # else:
-        #     return ask("Sorry, I don't see any device called " + obj)
     log("toggleOnOff", 2, "Command not sent (UnknownDevice:{})".format(obj))
     return ask("Sorry, I don't know a device called {}".format(obj))
 
@@ -186,10 +213,13 @@ def dflowOpenApp(app, action, device):
                 return ask(dflowErrMsg)
             else:
                 log("appOpen", 0, "Successfully parsed response.")
+                # If the command ran successfully
                 if responseJSON["return"] == "1":
                     log("appOpen", 0, "Action ran successfully.")
                     return ask("Ok.")
                 else:
+                    # This part handles the error message that will be told to
+                    # the user when it encountered errors.
                     if responseJSON["msg"] == "ProcAlreadyRunning":
                         log("appOpen", 2, "Only one instance of {} is allowed"
                             .format(app))
@@ -203,6 +233,8 @@ def dflowOpenApp(app, action, device):
                         return ask("There's something wrong with your \
                         configuration file. Check the file and restart the\
                         Windows client, then try again.")
+    # Shows the response from the plugin, to further investigate the error if
+    # an error happened
     log("appOpen", 2, "Response: {}".format(response))
     log("appOpen", 2, "Action failed to run.")
     return ask("I can't do that action for some reason. Check \
