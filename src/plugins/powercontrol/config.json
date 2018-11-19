@@ -1,0 +1,6 @@
+{
+  "MQTT_ADDRESS": "zefryuuko.ga",
+  "MQTT_PORT": 1883,
+  "MQTT_KEEPALIVE": 60,
+  "MQTT_RESPONSE_TIMEOUT": 4
+}

@@ -1,0 +1,18 @@
+{
+    "socket1": {
+      "type": "powercontrol",
+      "name": "desk light",
+      "status": "OFF",
+      "scheduled": ""
+    },
+    "socket2":{
+      "type": "powercontrol",
+      "name": "bedroom light",
+      "status": "OFF",
+      "scheduled": ""
+    },
+    "windowsClient1": {
+      "type": "windowscontrol",
+      "name": "My PC"
+    }
+}

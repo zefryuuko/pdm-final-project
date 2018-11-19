@@ -1,0 +1,31 @@
+# LIBRARY/EXTERNAL APP DOCUMENTATIONS
+Actions on Google = https://codelabs.developers.google.com/codelabs/actions-1/#0
+Dialogflow = https://dialogflow.com/docs/getting-started
+Python 3 = https://docs.python.org/3/reference/index.html
+Python Exception Handling = https://docs.python.org/3/tutorial/errors.html
+Python datetime = https://docs.python.org/2/library/datetime.html
+Python Threading = https://docs.python.org/2/library/threading.html
+paho-mqtt = https://pypi.org/project/paho-mqtt/
+Flask = http://flask.pocoo.org/docs/1.0/
+Flask Accessing Request Data = http://flask.pocoo.org/docs/1.0/quickstart/#accessing-request-data
+Flask-Assistant = https://flask-assistant.readthedocs.io/en/latest/
+colorama = https://pypi.org/project/colorama/
+ngrok = https://dashboard.ngrok.com/get-started
+
+# OTHER SOURCES
+Usage of importlib = https://www.youtube.com/watch?v=cbot48lckOs
+File existence check = https://stackoverflow.com/questions/82831/how-do-i-check-whether-a-file-exists-in-python
+List all files in a directory = https://stackoverflow.com/questions/3207219/how-do-i-list-all-files-of-a-directory
+JSON Formatting Example = https://json.org/example.html
+JSON Handling in Python = https://docs.python-guide.org/scenarios/json/
+Get JSON keys in first level = https://stackoverflow.com/questions/15789059/python-json-only-get-keys-in-first-level
+Get index in list = https://stackoverflow.com/questions/176918/finding-the-index-of-an-item-given-a-list-containing-it-in-python
+*args and **kwargs = https://www.saltycrane.com/blog/2008/01/how-to-use-args-and-kwargs-in-python/
+Serve static files in flask = https://stackoverflow.com/questions/20646822/how-to-serve-static-files-in-flask
+Flask Templates = https://www.youtube.com/watch?v=QnDWIZuWYW0
+Disable Flask Logging = https://stackoverflow.com/questions/14888799/disable-console-messages-in-flask-server
+Get IP Address of visitors in Flask = https://stackoverflow.com/questions/3759981/get-ip-address-of-visitors
+Measure time elapsed in Python = https://stackoverflow.com/questions/7370801/measure-time-elapsed-in-python
+HTTP GET in Python = https://stackoverflow.com/questions/645312/what-is-the-quickest-way-to-http-get-in-python
+
+Responsive Web Design = https://www.youtube.com/watch?v=1ZyDCt8QLxE

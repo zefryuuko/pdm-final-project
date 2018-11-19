@@ -1,0 +1,5 @@
+Flask==1.0.2
+Flask-Assistant==0.2.99
+paho-mqtt==1.4.0
+aniso8601==3.0.2
+colorama==0.4.0
