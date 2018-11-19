@@ -1,3 +1,15 @@
+# Program Design Methods Final Project:
+# Google Assistant Voice Control
+# --------------------------------------
+# Program by
+# Zefanya Gedalya B.L.T - 2201796970
+# Student of Computer Science
+# Binus University International
+# --------------------------------------
+# File Description (consolelog.py)
+# A module to print out command line output with colors based on the message
+# type
+
 from colorama import init, Fore, Style
 init()
 

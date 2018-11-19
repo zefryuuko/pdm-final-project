@@ -1,3 +1,14 @@
+# Program Design Methods Final Project:
+# Google Assistant Voice Control
+# --------------------------------------
+# Program by
+# Zefanya Gedalya B.L.T - 2201796970
+# Student of Computer Science
+# Binus University International
+# --------------------------------------
+# File Description (jsoonhandler.py)
+# A module that handles json file.
+
 import json
 from modules.consolelog import log
 

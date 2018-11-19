@@ -1,7 +1,14 @@
+# Program Design Methods Final Project:
+# Google Assistant Voice Control
+# --------------------------------------
+# Program by
+# Zefanya Gedalya B.L.T - 2201796970
+# Student of Computer Science
+# Binus University International
+# --------------------------------------
+# File Description (backgroundhandler.py)
 # Background Handler
 # A class that handles background tasks for each plugin.
-# https://github.com/zefryuuko
-# -------------------------------------------------------
 
 import threading
 from modules.consolelog import log
