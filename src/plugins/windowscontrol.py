@@ -1,3 +1,16 @@
+# Program Design Methods Final Project:
+# Google Assistant Voice Control
+# --------------------------------------
+# Program by
+# Zefanya Gedalya B.L.T - 2201796970
+# Student of Computer Science
+# Binus University International
+# --------------------------------------
+# File Description (windowscontrol.py)
+# WindowsControl Plugin
+# A plugin that handles app opening and closing on windows machines. This
+# connects to a windows client installed on a PC.
+
 from datetime import datetime as dt
 from modules.consolelog import log
 import json
@@ -6,6 +19,7 @@ import urllib.request
 
 
 class Plugin:
+    # A method to open the configuration file.
     def __openConfig(self):
         try:
             file = open("plugins/windowscontrol/config.json", "r").read()
@@ -41,18 +55,21 @@ class Plugin:
         return self.__pluginType
 
     def backgroundTask(self):
+        # If the PC is using dynamic address
         if self.__isDynamicAddress == 1:
             isAddrFound = False
             self.__desktopAddress = ""
             log("WINDOWSCONTROL", 2, "Desktop IP address is set to Dynamic.")
             log("WINDOWSCONTROL", 2, "Waiting for address...")
             while not isAddrFound:
+                # Wait until the windows client sends it's address
                 if self.__desktopAddress != "":
                     log("WINDOWSCONTROL", 0,
                         "Address received. Running background task.")
                     isAddrFound = True
 
             url = "http://{}/{}".format(self.__desktopAddress, "ping")
+            # Check the connection at X minutes. (Interval set on config.json)
             while True:
                 url = url.replace(" ", "%20")
                 log("WINDOWSCONTROL", 0, "Requesting ON status...")
@@ -70,6 +87,7 @@ class Plugin:
             url = "http://{addr}/{cmd}/{app}".format(addr=self.__desktopAddress,
                                                      cmd=value, app=param)
             url = url.replace(" ", "%20")
+            # Requests response from the windows client app.
             log("WINDOWSCONTROL", 0, "Requesting response from {}".format(url))
             response = json.loads(str(urllib.request.urlopen(url).read())[2:-1])
             return json.dumps(response)
