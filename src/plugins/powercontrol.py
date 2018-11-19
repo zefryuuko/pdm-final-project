@@ -1,7 +1,16 @@
+# Program Design Methods Final Project:
+# Google Assistant Voice Control
+# --------------------------------------
+# Program by
+# Zefanya Gedalya B.L.T - 2201796970
+# Student of Computer Science
+# Binus University International
+# --------------------------------------
+# File Description (powercontrol.py)
 # PowerControl plugin
-# a plugin to control power outlet or lights using the Mosquitto protocol
-# https://github.com/zefryuuko
-# ------------------------------------------------------------------------
+# A plugin to control lights (on an Arduino) or power outlets (with a relay on
+# an Arduino) using the Mosquitto protocol
+
 
 from datetime import datetime as dt
 import json
@@ -74,6 +83,7 @@ class Plugin:
         log("POWERCONTROL", 0, "Sending value '{}' in key '{}' to {}"
             .format(value, id, self.__MQTT_ADDRESS))
         try:
+            # Try publishing a message to the MQTT broker
             self.__tempVerifyThread = [""]
             publish.single(id, value, hostname=self.__MQTT_ADDRESS,
                            port=self.__MQTT_PORT,
@@ -85,6 +95,9 @@ class Plugin:
             log("POWERCONTROL", 0, "Successfully sent to MQTT broker.")
             log("POWERCONTROL", 0, "Waiting for verification...")
             try:
+                # A thread used to wait for incoming message from the device
+                # that it sent the message to. This is part of the
+                # verification process
                 verifyThread = threading.Thread(target=self.__simpleSubscribe,
                                                 args=(id+"R",))
                 verifyThread.start()
@@ -94,6 +107,8 @@ class Plugin:
                 log("POWERCONTROL", 1, e)
                 return False
             else:
+                # If the message is sent and the verification message is
+                # received
                 if msgRcv == "MSGRCV {} {}".format(id, value):
                     log("POWERCONTROL", 0,
                         "Successfully received verification request.")
