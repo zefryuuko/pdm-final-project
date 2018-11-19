@@ -1,7 +1,14 @@
+# Program Design Methods Final Project:
+# Google Assistant Voice Control
+# --------------------------------------
+# Program by
+# Zefanya Gedalya B.L.T - 2201796970
+# Student of Computer Science
+# Binus University International
+# --------------------------------------
+# File Description (pluginloader.py)
 # Plugin loader
 # A class designed to dynamically load plugins (.py file) using importlib.
-# https://github.com/zefryuuko
-# -------------------------------------------------------------------------
 
 import importlib
 import os
@@ -9,6 +16,7 @@ from modules.consolelog import log
 
 
 class PluginLoader:
+    # Gets the list of python files in the directory.
     def __getPlugins(self, pluginDir):
         for (dirpath, dirnames, filenames) in os.walk(pluginDir):
             x = []
@@ -21,6 +29,7 @@ class PluginLoader:
                     xa.append(x[i])
             return xa
 
+    # A method to construct the plugin and put the plugins in a list
     def __loadPlugin(self, pluginDir, pluginNameList):
         plugins = []
         for i in range(len(pluginNameList)):
