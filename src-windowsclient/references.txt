@@ -1,0 +1,5 @@
+Get OS in Python = https://stackoverflow.com/questions/110362/how-can-i-find-the-current-os-in-python
+ngrok Client API = https://ngrok.com/docs#client-api
+Run executables using Python = https://stackoverflow.com/questions/14831716/can-i-open-an-application-using-python-during-run-time
+Check if a program is running = https://stackoverflow.com/questions/7787120/python-check-if-a-process-is-running-or-not
+Kill a process using Python = https://stackoverflow.com/questions/6278847/is-it-possible-to-kill-a-process-on-windows-from-within-python

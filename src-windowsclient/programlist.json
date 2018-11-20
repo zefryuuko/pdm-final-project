@@ -1,0 +1,24 @@
+{
+  "programs": [
+    {
+      "exec": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
+      "name": ["Google Chrome", "Chrome"],
+      "allowMultiple": 1
+    },
+    {
+      "exec": "C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\EXCEL.exe",
+      "name": ["Excel", "MS Excel", "Microsoft Excel"],
+      "allowMultiple": 1
+    },
+    {
+      "exec": "C:\\Program Files\\Autodesk\\3ds Max 2017\\3dsmax.exe",
+      "name": ["3ds", "3ds Max", "Autodesk 3ds", "Autodesk 3ds Max"],
+      "allowMultiple": 0
+    },
+    {
+      "exec": "C:\\Users\\zef\\AppData\\Local\\atom\\atom.exe",
+      "name": ["Atom"],
+      "allowMultiple": 0
+    }
+  ]
+}
