@@ -27,5 +27,3 @@ Disable Flask Logging = https://stackoverflow.com/questions/14888799/disable-con
 Get IP Address of visitors in Flask = https://stackoverflow.com/questions/3759981/get-ip-address-of-visitors
 Measure time elapsed in Python = https://stackoverflow.com/questions/7370801/measure-time-elapsed-in-python
 HTTP GET in Python = https://stackoverflow.com/questions/645312/what-is-the-quickest-way-to-http-get-in-python
-
-Responsive Web Design = https://www.youtube.com/watch?v=1ZyDCt8QLxE
