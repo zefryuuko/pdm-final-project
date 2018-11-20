@@ -1,0 +1,6 @@
+Libraries used:
+Adafruit_MQTT library = https://github.com/adafruit/Adafruit_MQTT_Library
+
+References or documentations:
+Adafruit_MQTT Example code = https://github.com/adafruit/Adafruit_MQTT_Library/blob/master/examples/mqtt_esp8266/mqtt_esp8266.ino
+Joining 2 char* in C++ = https://stackoverflow.com/questions/18468229/concatenate-two-char-strings-in-a-c-program/18468459
