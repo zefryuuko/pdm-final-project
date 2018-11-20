@@ -79,7 +79,6 @@ class Plugin:
                     log("WINDOWSCONTROL", 1, "ERROR: {}".format(e))
                 else:
                     log("WINDOWSCONTROL", 0, "Windows Client is connected.")
-                    self.__desktopAddress = response
                     time.sleep(self.__pingInterval*60)
 
     def sendData(self, id, value, param):
